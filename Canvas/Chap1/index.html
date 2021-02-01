@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>canvas</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+        var g = 0;
+        var r = 0;
+        var gap = 10
+        var maxValue = 100;
+        var minValue = 0;
+        var centerValue = (maxValue + minValue) / 2;
+        var value = 0;                                      //value값을 0 ~ 100까지 바꿔보기
+
+        for (var i = 0; i < canvas.height / gap; i++) {
+            for (var j = 0; j < canvas.width / gap; j++) {
+                var x = gap * j;
+                var y = gap * i;
+                if (value > centerValue) {
+                    r = 255;
+                    g = 255 - ((value - centerValue) / (maxValue - centerValue)) * 255
+                } else {
+                    g = 255;
+                    r = 255 * ((value - minValue) / (centerValue - minValue))
+                }
+
+                ctx.fillStyle = "rgb(" + r + "," + g + ",0)"
+                // g += 255 / (((canvas.width / gap) * (canvas.height / gap)) / 2);
+                // r = 510 - g;
+                ctx.fillRect(x, y, gap, gap);
+            }
+            value++;
+        }   
+    </script>
+</body>
+
+</html>
