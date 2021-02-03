@@ -1,10 +1,15 @@
 # [tempMap] 5. 지도위에 overlay하기
-#Project/tempMap
+
+
+Demo: http://211.214.35.45:16000/Chap5
 
 Chap4에서는 4 격자위에서만 그렸지만 여기서는 여러 격자에서 Bilinear Interpolation하게 된다. 원리는 WindMap의 Chap5와 동일하니 참고하기 바란다.
 
 완성본 사진이다.
-[image:E85A1254-63A0-4354-A308-04D28AF198D2-1666-00001D5E973DC80E/스크린샷 2021-02-03 오후 10.10.08.png] [image:CC1DC940-0AD3-43A0-946D-ABD72BC27432-1666-00001D6026C6DC1A/스크린샷 2021-02-03 오후 10.10.15.png] [image:6816C2E8-9060-4553-A25B-6CEF27848932-1666-00001D65F09315E4/스크린샷 2021-02-03 오후 10.10.40.png] [image:B54F40A1-BC1C-49E9-8596-4A430B3D43B3-1666-00001D633CE3427B/스크린샷 2021-02-03 오후 10.10.28.png]
+![img8.png](../Image/img8.png)
+![img9.png](../Image/img9.png)
+![img10.png](../Image/img10.png)
+![img11.png](../Image/img11.png)
 
 우선 Chap2를 통해 GridData를 얻었다는것을 알고있다.
 이번챕터에서는 전체화면을 10 * 10 pixel로 전부 채울것이다.

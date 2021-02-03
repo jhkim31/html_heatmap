@@ -1,5 +1,7 @@
 # tempMap 1. 미세먼지 api 받아오기
-#Project/tempMap
+
+
+Demo: http://211.214.35.45:16000/Chap1
 
 
 
@@ -32,8 +34,12 @@ ex)`http://openapi.airkorea.or.kr/openapi/services/rest/MsrstnInfoInqireSvc/getM
 * 측정가능한 요소
 * latitude
 * longitude
-가 있다.
-[image:C41C0600-2903-46F0-81D6-B98F6A952772-1666-00000D25E40B2C44/스크린샷 2021-02-03 오후 5.02.04.png]
+가 있다.  
+
+
+![img1.png](../Image/img1.png)
+
+
 **측정소 정보 리스트를 가져오는 이유는 2가지 이다**
 
 1. 후에 기술할 특정 측정소에서는 한번에 한 측정소의 실시간 측정정보 조회를 조회할 수 있기 때문에 모든 측정소의 정보를 얻기 위해서는 모든 측정소의 이름이 필요하다. 
@@ -59,7 +65,7 @@ ex)`http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesure
 
 
 리턴정보:
-[image:17D3F513-2426-4958-AFCA-4350C362010E-1666-00000F066975BB6D/스크린샷 2021-02-03 오후 5.36.24.png]
+![img2.png](../Image/img2.png)
 
 특정 측정소의 실시간 정보를 가져오는 api이다
 현재부터 원하는 시점까지의 정보가 조회 가능하다.
@@ -117,7 +123,7 @@ for i in jsonData:
 # 여기서 코드는, 데이터를 따로 저장하기 위한 코드다.           
 now = time.localtime()
 fileName = "%04d.%02d.%02d.%02d.00.미세먼지데이터.txt" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour)
-with open('/Users/jhkim_mac/Desktop/ketiProject/temperatureMap/미세먼지데이터/' + fileName, 'w', encoding = "UTF-8-sig") as f:
+with open('/Users/jhkim_mac/Desktop/ketiProject/temperatureMap/미세먼지데이터/' + fileName, 'w', encoding = "UTF-8-sig") as f:
     f.write(json.dumps(returnData, ensure_ascii=False))
     f.close()
 ```
