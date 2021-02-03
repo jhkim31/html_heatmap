@@ -3,7 +3,7 @@ var stationGap = 0.1
 var container = document.getElementById('map');                 //지도를 그릴 element
 var options = {
     center: new kakao.maps.LatLng(36.970, 127.589),
-    level: 12
+    level: 10
 };                                                              //지도의 설정 정보
 
 var map = new kakao.maps.Map(container, options);               // container element에 맵 객체 생성
@@ -11,12 +11,12 @@ var map = new kakao.maps.Map(container, options);               // container ele
 var coordinate = map.getProjection()
 var drawnStation = []
 
-var minlat = 32
-var maxlat = 38
-var latgap = ((maxlat * 10) - (minlat * 10)) / 10
-var minlng = 120
-var maxlng = 132
+var minlat = 31
+var maxlat = 44
+var minlng = 115
+var maxlng = 138
 var lnggap = ((maxlng * 10) - (minlng * 10)) / 10
+var latgap = ((maxlat * 10) - (minlat * 10)) / 10
 var gap = 0.2
 var grid = []
 var canvas = document.getElementById('canvas')
@@ -27,10 +27,10 @@ canvas.height = window.innerHeight
 
 
 window.onload = function () {
-    showOverlay()
+    // showOverlay()
     init();
+    drawCanvas();
     // showGrid();
-
 }
 
 function showOverlay() {
@@ -98,7 +98,14 @@ function showGrid() {
     }
 }
 window.addEventListener('click', e => {
-    console.log(getValue(e.pageX, e.pageY))
+    var status = document.getElementById('status');
+    console.log(e.pageX, e.pageY)
+    var point = new kakao.maps.Point(e.pageX, e.pageY);
+    
+    status.innerHTML = ` 
+        ${coordinate.coordsFromContainerPoint(point).Ma}, ${coordinate.coordsFromContainerPoint(point).La}<br>
+        ${getValue(e.pageX, e.pageY)}
+    `
 })
 
 function selectStations(latitude, longitude) {
@@ -139,7 +146,12 @@ function IDWInterpolation(latitude, longitude, stations) {
         sum1 += (stations[i].pm10Value / (d * d));
         sum2 += (1 / (d * d));
     }
-    return sum1 / sum2;
+    if (sum2 != 0){
+        return sum1 / sum2;
+    } else {
+        return 0;
+    }
+    
 }
 
 function init() {
@@ -151,11 +163,12 @@ function init() {
             grid[county][countx] = []
             var stationInGrid = selectStations(j, i);
             var v = IDWInterpolation(j, i, stationInGrid);
-            if (isNaN(v)) {
-                grid[county][countx] = [j.toFixed(2), i.toFixed(2), 10]
-            } else {
-                grid[county][countx] = [j.toFixed(2), i.toFixed(2), v]
-            }
+            grid[county][countx] = [j.toFixed(2), i.toFixed(2), v]
+            // if (isNaN(v)) {
+            //     grid[county][countx] = [j.toFixed(2), i.toFixed(2), 10]
+            // } else {
+                
+            // }
             countx++;
         }
         countx = 0;
@@ -246,15 +259,9 @@ var interpolate = function (latitude, longitude, g00, g10, g01, g11, gridn) {
     } catch (error) {
         debugger;
     }
-
-
     var y = (latitude % gap) * (1 / gap)
     var d4 = y
     var d3 = 1 - y
-
     var result_vector_x = d3 * x2_vector_x + d4 * x1_vector_x
-
-
-
     return result_vector_x                //보간값 리턴
 }

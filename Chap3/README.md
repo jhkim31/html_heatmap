@@ -1,0 +1,60 @@
+# [tempMap] 3. canvas 그라데이션 만들기.
+
+html canvas에서는 자체적으로 그라데이션을 제공한다.
+하지만 그라데이션을 그리는 방법이 한정되어있어 자유롭지 못하다.
+
+그래서 나는 한 픽셀을 10px * 10px의 크기로 만들어 이런 픽셀들을 무수히 많이 찍어내어 그라데이션을 표현했다.
+
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>canvas</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        canvas.width = 1000
+        canvas.height = 1000
+        var g = 0;
+        var r = 0;
+        var gap = 10
+        var maxValue = 100;
+        var minValue = 0;
+        var centerValue = (maxValue + minValue) / 2;
+        var value = 0;                                      
+
+        for (var i = 0; i < canvas.height / gap; i++) {	//height = 1000, gap = 10 즉 100개의 픽셀이 생긴다
+            for (var j = 0; j < canvas.width / gap; j++) { //width = 1000, gap = 10 즉 100개의 픽셀이 생긴다
+                var x = gap * j;
+                var y = gap * i;
+                if (value > centerValue) {
+                    r = 255;
+                    g = 255 - ((value - centerValue) / (maxValue - centerValue)) * 255
+                } else {
+                    g = 255;
+                    r = 255 * ((value - minValue) / (centerValue - minValue))
+                }//그라데이션을 위해 자연스럽게 변하는 rgb값을 계산한다.
+
+                ctx.fillStyle = "rgb(" + r + "," + g + ",0)"		//색칠할 픽셀(10px * 10px)의 색을 지정한다.
+                ctx.fillRect(x, y, gap, gap);
+						//순서대로 x,y좌표에 픽셀(10 * 10)을 그린다
+            }
+            value++;
+        }   
+    </script>
+</body>
+
+</html>
+
+```
+
