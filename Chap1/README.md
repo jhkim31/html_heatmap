@@ -6,7 +6,8 @@ Demo: http://211.214.35.45:16000/Chap1
 
 
 TemperatureMap을 사용해, 우리나라 미세먼지를 Overlay하는 프로젝트이다.
-TemperatureMap에 관한 내용만을 볼려면, Chap3부터 보는것을 추천
+TemperatureMap에 관한 내용만을 볼려면, Chap3부터 보는것을 추천.    
+
 api는 공공데이터 포털의 데이터를 사용한다.
 
 ## 측정소 정보 api
