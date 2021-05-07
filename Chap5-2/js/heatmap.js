@@ -1,4 +1,4 @@
-import { data as stationData } from './data.js';
+import { heatData as stationData } from './data.js';
 
 var HeatMap = function () {
     //지도의 설정 정보
@@ -13,7 +13,7 @@ var HeatMap = function () {
     var latgap = ((maxlat * 10) - (minlat * 10)) / 10
     var gap = 0.2
     var grid = []
-    var canvas = document.getElementById('canvas')
+    var canvas = document.getElementById('heatmap')
     var ctx = canvas.getContext('2d')
     this.showHeat = false
 
@@ -85,6 +85,7 @@ var HeatMap = function () {
             countx = 0;
             county++;
         }
+        this.drawCanvas();
     }
 
     this.drawCanvas = () => {

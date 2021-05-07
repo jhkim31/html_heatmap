@@ -1,4 +1,4 @@
-export let data =  [
+export let heatData =  [
     {
         "stationName": "반송로", 
         "latitude": "35.234141", 

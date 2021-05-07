@@ -10,7 +10,7 @@ window.onload = function () {
     heatmap.drawCanvas();
 }
 
-document.getElementById('heatmap').addEventListener('click', e => {
+document.getElementById('showHeatMap').addEventListener('click', e => {
     heatmap.toggleHeatMap()
 })
 

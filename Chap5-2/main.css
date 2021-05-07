@@ -11,13 +11,13 @@ html {
     z-index: 1;
 }
 
-#canvas {
+#heatmap {
     position: absolute;
     pointer-events: none;
     z-index: 2;
     opacity: 0.5;
 }
-#heatmap{ 
+#showHeatMap{ 
     position:absolute;
     z-index: 998;
 }
