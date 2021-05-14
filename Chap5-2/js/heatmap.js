@@ -33,7 +33,6 @@ var HeatMap = function () {
         function deg2rad(deg) {
             return deg * (Math.PI / 180)
         }
-
         var R = 6371; // Radius of the earth in km
         var dLat = deg2rad(lat2 - lat1);  // deg2rad below
         var dLon = deg2rad(lng2 - lng1);
@@ -75,16 +74,12 @@ var HeatMap = function () {
                 var stationInGrid = selectStations(j, i);
                 var v = IDWInterpolation(j, i, stationInGrid);
                 grid[county][countx] = [j.toFixed(2), i.toFixed(2), v]
-                // if (isNaN(v)) {
-                //     grid[county][countx] = [j.toFixed(2), i.toFixed(2), 10]
-                // } else {
-
-                // }
                 countx++;
             }
             countx = 0;
             county++;
         }
+        console.log(grid)
         this.drawCanvas();
     }
 
@@ -97,6 +92,7 @@ var HeatMap = function () {
             var minValue = 10;
             var centerValue = (maxValue + minValue) / 2;
             var value = 0;
+            var blur = 5;
             for (var i = 0; i < canvas.height / pixelGap; i++) {
                 for (var j = 0; j < canvas.width / pixelGap; j++) {
                     var x = pixelGap * j;
@@ -112,6 +108,7 @@ var HeatMap = function () {
                     // r = 255;
                     // g = 255 - ((value - minValue) / (maxValue - minValue)) * 255
                     ctx.fillStyle = "rgb(" + r + "," + g + ",0)"
+                    ctx.shadowBlur = blur;
                     ctx.fillRect(x, y, pixelGap, pixelGap);
                 }
             }
